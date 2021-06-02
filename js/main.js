@@ -10,7 +10,7 @@ var city = "Davao",
 
 var output_df, input1, input2;
 
-var csr_link = (typeof window.orientation !== 'undefined') ? "https://m.me/salamfooddelivery.csr" : "https://facebook.com/messages/t/salamfooddelivery.csr";
+var csr_link = (typeof window.orientation !== 'undefined') ? "//m.me/salamfooddelivery.csr" : "//facebook.com/messages/t/salamfooddelivery.csr";
 var messenger = "<a target='_blank' href='" + csr_link + "' style='text-decoration: none;'><i class='fab fa-facebook-messenger'></i>messenger</a>";
 initMap();
 
@@ -155,7 +155,7 @@ function computeTotalDistance (result) {
     $("#output").html(html_result);
     output_df.style.display = "block";
 
-    history.pushState({}, "Direction", "?from=" + from + "&to=" + to);
+    history.pushState({}, "Direction", ".?from=" + from + "&to=" + to);
     murl = new URL(window.location.href);
 }
 
@@ -172,7 +172,7 @@ function checkBlocklist (blocklist, text) {
 
 // Clear results
 function clearRoute () {
-    history.pushState({}, "Direction", "/");
+    history.pushState({}, "Direction", "./");
     input1.value = "";
     input2.value = "";
     input1.style.color = "#683496";
