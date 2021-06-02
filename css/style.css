@@ -1,0 +1,304 @@
+* {
+    margin: auto;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    height: 96vh;
+    background-color: #683496;
+    background-size: cover;
+    background-position: top;
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
+    color: rgb(33, 33, 33);
+}
+
+i.fas {
+    font-size: 1.7rem;
+    color: #683496;
+    padding-right: 5px;
+}
+
+.in-title {
+    color: #683496;
+    text-align: center;
+    margin-bottom: 1rem;
+    border: 0;
+    border-bottom: 0.5px solid rgb(104 52 150 / 10%);
+}
+
+/* Clearfix */
+.row::after {
+    content: "";
+    display: table;
+    clear:both;
+}
+
+.header {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin: 1.5rem auto;
+}
+
+.header h1 {
+    color: #e4daee;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.container {
+    border-radius: 1rem;
+    width: 95%;
+    background-color: #fff;
+    padding: 2rem;
+}
+
+.location-label{
+    font-size: 1.6rem;
+    float: left;
+    width: 25%;
+    margin-top: .6rem;
+}
+
+.location-input {
+    float: left;
+    width: 75%;
+    margin-top: .6rem;
+    position: relative;
+}
+
+.location-input i {
+  position: absolute;
+
+  /* These are set relative to the height of the input box to bound the box neatly inside. This is aesthetic to me but you may change the dimensions of course. */
+  right: 0.3rem;
+  top: 0.3rem;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 0.3rem;
+
+  /* content in the icon div is centered, without bootstrap or font-awesome you may wish to add your own text in the span */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+#getLocation {
+    cursor: pointer;
+    color: #6834963d;
+}
+
+#getLocation:hover {
+    color: #683496;;
+}
+
+.location-input::-webkit-input-placeholder {
+    color: #c09fdd;
+}
+
+input {
+    height: 30px;
+    width: 100%;
+}
+
+input {
+    border: 0;
+    border-bottom: 0.5px solid rgb(104 52 150 / 25%);
+    font-size: 1.5rem;
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: 450;
+    color: #683496;
+}
+
+input::placeholder {
+    font-size: 14px;
+    font-weight: normal;
+}
+
+input:focus::placeholder {
+    color: white;
+}
+
+input:focus {
+    border: 0;
+    border-bottom: 1.5px solid rgb(104 52 150 / 100%);
+}
+
+::-moz-placeholder, ::-ms-placeholder, ::placeholder {
+    color: #c09fdd;
+}
+
+.button {    
+    background-image: linear-gradient(to top, #683496 0%, #6f86d6 100%);
+    text-transform: uppercase;
+    text-decoration: none;
+    outline:none;
+    color: white;
+    padding: 1.2rem 2.2rem;
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+    float: right;
+    margin-right: .5rem;
+    transition: ease-in-out .1s;
+}
+
+.button:hover {    
+    background-image: linear-gradient(-225deg, #A445B2 0%, #683496 52%, #571e88 100%);
+    transform: scale(1.015);
+    transition: ease-in .1s;
+}
+
+.result-table {
+    font-size: 1.6rem;
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+
+    /* Animation */
+    animation-name: moveIn;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+}
+
+#route-panel {
+  font-family: "Roboto", "sans-serif";
+  font-size: 14px;
+}
+
+#route-panel select,
+#route-panel input {
+  font-size: 16px;
+}
+
+#route-panel select {
+  width: 100%;
+}
+
+#route-panel i {
+  font-size: 14px;
+}
+
+.container-map {
+    width: 100%;
+    height: 50rem;
+    margin: 2rem auto;
+}
+
+#route-panel {
+  width: 100%;
+  height: 100%;
+}
+
+.panel {
+  height: 100%;
+  overflow: auto;
+}
+
+.bottom {
+    padding-top: 3rem;
+}
+
+.footer {
+    font-size: 1.3rem;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center; 
+}
+
+.footer p {
+    color: white;    
+}
+
+.footer a {
+    color: #c09fdd;
+    text-decoration: none;    
+}
+
+.info-small {
+    font-size: 1.3rem;
+    font-style: italic;
+}
+
+.on-mobile {
+    display: none;
+}
+
+.highlight-bold {
+    font-weight: bold;
+    color: #683496;
+}
+
+
+/* Animations */
+@keyframes moveIn {
+    0% {
+      opacity: 0;
+      transform: translateY(-.5rem);
+    }
+    
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+}
+
+/* Media */
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .container {
+        width: 95%;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .container {
+        width: 95%;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .container {
+        width: 95%;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .container {
+        width: 50rem;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .container {
+        width: 100rem;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .hid-mobile {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .on-mobile {
+        display: inline;
+    }
+}

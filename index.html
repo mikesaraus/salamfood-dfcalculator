@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Salam Food Delivery</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Salam Food - Errands Delivery Fee Calculator">
+    <meta name="keywords" content="Salam, Salam Food, Delivery, Halal, Halal Delivery, New Delivery">
+    <meta name="author" content="Salam Food Delivery">
+
+    <meta property="og:url" content="//www.facebook.com/salamfoodservice" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Salam Food Delivery" />
+    <meta property="og:description" content="Salam Food - Errands Delivery Fee Calculator" />
+    <meta property="og:image" content="/salamfood-new.png" />
+
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/autocomplete.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G4F438NRRC"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-G4F438NRRC');
+    </script>
+</head>
+
+<body>
+    <div class="header">
+        <div class="row">
+            <h1>
+                <a href="/">
+                    <img src="/salamfood-white.png" width="150px" />
+                </a>
+            </h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <form>
+            <div class="in-title">
+                <h1>Delivery Fee Calculator</h1>
+            </div>
+            <!-- Location 1 -->
+            <div class="row">
+                <div class="location-label">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <label class="hid-mobile">Address of Origin: </label>
+                    <label class="on-mobile">From: </label>
+                </div>
+                <div class="location-input">
+                    <i id="getLocation" onclick="getLocation();" class="fas fa-street-view"></i>
+                    <input type="text" tabindex="1" id="location-1" name="origin"
+                        placeholder="Enter pickup location...">
+                </div>
+            </div>
+            <!-- Location 2 -->
+            <div class="row">
+                <div class="location-label">
+                    <i class="fas fa-map-pin"></i>
+                    <label class="hid-mobile">Delivery Location: </label>
+                    <label class="on-mobile">To: </label>
+                </div>
+                <div class="location-input">
+                    <input type="text" tabindex="2" id="location-2" name="destination"
+                        placeholder="Enter delivery location...">
+                </div>
+            </div>
+
+            <!-- Submit button -->
+            <div class="row" style="margin: 1rem auto;">
+                <button class="button" tabindex="4" type="button" onclick="clearRoute();" id="clear">Clear</button>
+                <button class="button" tabindex="3" type="button" onclick="submitSearch();" id="submit">Submit</button>
+            </div>
+
+            <!-- Stats table -->
+            <div id="output" class="result-table"></div>
+        </form>
+
+        <div class="container-map" id="google-map"></div>
+        <div id="route-panel"></div>
+    </div>
+
+    <div class="bottom">
+        <div class="row">
+            <h1></h1>
+        </div>
+    </div>
+
+    <!-- Footer with dynamic year change -->
+    <div class="footer">
+        <p>
+            <a target="_blank" href="//www.facebook.com/salamfoodservice">
+                Salam Food Delivery &copy;
+                <script type="text/javascript">document.write(new Date().getFullYear());</script>
+            </a>
+        </p>
+    </div>
+
+    <script
+        src="//maps.googleapis.com/maps/api/js?key=AIzaSyD1wSQGAKzfWD8L71juLGRaAZRg8U3QNBU&libraries=places"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+
+    <!-- Messenger Chat Plugin Code -->
+    <div id="fb-root"></div>
+
+    <!-- Your Chat Plugin code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
+
+    <script>
+        var chatbox = document.getElementById('fb-customer-chat');
+        chatbox.setAttribute("page_id", "101741918417673");
+        chatbox.setAttribute("attribution", "biz_inbox");
+        window.fbAsyncInit = function () {
+            FB.init({
+                xfbml: true,
+                version: 'v10.0'
+            });
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = '//connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+</body>
+
+</html>
