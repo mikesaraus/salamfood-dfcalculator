@@ -26,6 +26,7 @@ function initMap () {
         scaleControl: true,
         rotateControl: true,
         zoomControl: true,
+        gestureHandling: "greedy",
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         zoomControlStyle: google.maps.ZoomControlStyle.SMALL,
         style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
