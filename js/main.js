@@ -72,7 +72,7 @@ function initMap () {
 
     var autocomplete2 = new google.maps.places.Autocomplete(input2, map_options);
     autocomplete2.setBounds(map_circle.getBounds());
-    
+
     // Preload URL Query
     cparseUrl(murl);
 }
@@ -243,23 +243,28 @@ function cparseUrl () {
     submitSearch();
 }
 
-function submitSearch() {
+function submitSearch () {
     var from = input1.value,
         to = input2.value;
-    if (from.toLowerCase() == "my location") getLocation();
+    if (from.toLowerCase() == "my location") {
+        getLocation();
+        return;
+    }
     if (from && to) {
         calcRoute();
     } else if (!from && to) {
         input1.focus()
     } else if (from && !to) {
         input2.focus();
+    } else {
+        input1.focus();
     }
-    return;
 }
 
-function getLocation() {
+function getLocation () {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(fetchAddress);
+        submitSearch();
     } else {
         alert("Error: The Geolocation service failed.");
     }
