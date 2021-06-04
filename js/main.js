@@ -29,7 +29,11 @@ function initMap () {
         gestureHandling: "greedy",
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         zoomControlStyle: google.maps.ZoomControlStyle.SMALL,
-        style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+        style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+        mapTypeControlOptions: {
+            style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+            position: google.maps.ControlPosition.CENTER_TOP
+        }
     };
 
     output_df = document.getElementById("output");
