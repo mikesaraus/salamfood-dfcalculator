@@ -10,7 +10,7 @@ var city = "Davao",
 
 var output_df, input1, input2;
 
-var csr_link = (checkIsMobile()) ? "//m.me/salamfooddelivery.csr" : "//facebook.com/messages/t/salamfooddelivery.csr";
+var csr_link = (checkIsMobile()) ? "https://m.me/salamfooddelivery.csr" : "https://facebook.com/messages/t/salamfooddelivery.csr";
 var messenger = "<a target='_blank' href='" + csr_link + "' style='text-decoration: none;'><i class='fab fa-facebook-messenger'></i>messenger</a>";
 initMap();
 
@@ -31,7 +31,8 @@ function initMap () {
         scaleControl: true,
         rotateControl: true,
         zoomControl: true,
-        gestureHandling: (checkIsMobile) ? "cooperative" : "greedy",
+        gestureHandling: (checkIsMobile()) ? "cooperative" : "greedy",
+        mapId: "288ebbf7e4c6cacd",
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         zoomControlStyle: google.maps.ZoomControlStyle.SMALL,
         style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
