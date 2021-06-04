@@ -166,7 +166,7 @@ function computeTotalDistance (result) {
     $("#output").html(html_result);
     output_df.style.display = "block";
 
-    history.pushState({}, "Direction", ".?from=" + myroute.bounds.oc.g + ", " + myroute.bounds.Eb.g + "&to=" + myroute.bounds.oc.i + ", " + myroute.bounds.Eb.i);
+    history.pushState({}, "Direction", ".?from=" + myroute.bounds.oc.g + "," + myroute.bounds.Eb.g + "&to=" + myroute.bounds.oc.i + "," + myroute.bounds.Eb.i);
     murl = new URL(window.location.href);
 }
 
