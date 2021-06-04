@@ -25,20 +25,29 @@ function initMap () {
     var mapOptions = {
         center: myLatLng,
         zoom: 12,
-        mapTypeControl: true,
-        streetViewControl: true,
-        fullscreenControl: true,
         scaleControl: true,
         rotateControl: true,
-        zoomControl: true,
+        zoomControlStyle: google.maps.ZoomControlStyle.SMALL,
         gestureHandling: (checkIsMobile()) ? "cooperative" : "greedy",
+        style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+        streetViewControl: true,
+        streetViewControlOptions: {
+            position: google.maps.ControlPosition.LEFT_CENTER
+        },
+        fullscreenControl: true,
+        fullscreenControlOptions: {
+            position: google.maps.ControlPosition.BOTTOM_LEFT
+        },
+        zoomControl: true,
+        zoomControlOptions: {
+            position: google.maps.ControlPosition.LEFT_CENTER
+        },
         mapId: "288ebbf7e4c6cacd",
         mapTypeId: google.maps.MapTypeId.ROADMAP,
-        zoomControlStyle: google.maps.ZoomControlStyle.SMALL,
-        style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+        mapTypeControl: true,
         mapTypeControlOptions: {
             style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-            position: google.maps.ControlPosition.BOTTOM_CENTER
+            position: google.maps.ControlPosition.TOP_RIGHT
         }
     };
 

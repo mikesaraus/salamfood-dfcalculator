@@ -37,14 +37,12 @@
     <div class="container">
         <form>
             <div class="in-title">
-                <h1>Delivery Fee Calculator</h1>
+                <h1><img src="./salamfood-2.png" width="150px"></h1>
             </div>
             <!-- Location 1 -->
-            <div class="row">
+            <div class="row input-area">
                 <div class="location-label">
                     <i class="fas fa-map-marker-alt"></i>
-                    <label class="hid-mobile">Address of Origin: </label>
-                    <label class="on-mobile">From: </label>
                 </div>
                 <div class="location-input">
                     <i id="getLocation" onclick="getLocation();" class="fas fa-street-view"></i>
@@ -53,22 +51,14 @@
                 </div>
             </div>
             <!-- Location 2 -->
-            <div class="row">
+            <div class="row input-area">
                 <div class="location-label">
                     <i class="fas fa-map-pin"></i>
-                    <label class="hid-mobile">Delivery Location: </label>
-                    <label class="on-mobile">To: </label>
                 </div>
                 <div class="location-input">
                     <input type="text" tabindex="2" id="location-2" name="destination"
                         placeholder="Enter delivery location...">
                 </div>
-            </div>
-
-            <!-- Submit button -->
-            <div class="row" style="margin: 1rem auto;">
-                <button class="button" tabindex="4" type="button" onclick="clearRoute();" id="clear">Clear</button>
-                <button class="button" tabindex="3" type="button" onclick="submitSearch();" id="submit">Submit</button>
             </div>
 
             <!-- Stats table -->

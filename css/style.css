@@ -24,11 +24,14 @@ i.fas {
     color: #683496;
     padding-right: 5px;
 }
+.row.input-area {
+    border: 0;
+    border-bottom: .2rem solid rgb(104 52 150 / 50%);
+}
 
 .in-title {
     color: #683496;
     text-align: center;
-    margin-bottom: 1rem;
     border: 0;
     border-bottom: 0.5px solid rgb(104 52 150 / 10%);
 }
@@ -44,9 +47,8 @@ i.fas {
     position: absolute;
     overflow: hidden;
     border-radius: 1rem;
-    width: 95%;
-    background-color: hsla(0, 0%, 100%, 0.9);
-    padding: 2rem;
+    background-color: hsla(0, 0%, 100%, 0.95);
+    padding: 1.5rem;
     z-index: 1;
     margin: 1rem;
 }
@@ -54,13 +56,13 @@ i.fas {
 .location-label{
     font-size: 1.6rem;
     float: left;
-    width: 25%;
+    width: 5%;
     margin-top: .6rem;
 }
 
 .location-input {
     float: left;
-    width: 75%;
+    width: 95%;
     margin-top: .6rem;
     position: relative;
 }
@@ -98,11 +100,8 @@ i.fas {
 input {
     height: 30px;
     width: 100%;
-}
-
-input {
     border: 0;
-    border-bottom: 0.5px solid rgb(104 52 150 / 25%);
+    outline: none;
     font-size: 1.5rem;
     font-family: Roboto, sans-serif;
     font-style: normal;
@@ -119,11 +118,6 @@ input:focus::placeholder {
     color: white;
 }
 
-input:focus {
-    border: 0;
-    border-bottom: 1.5px solid rgb(104 52 150 / 100%);
-}
-
 ::-moz-placeholder, ::-ms-placeholder, ::placeholder {
     color: #c09fdd;
 }
@@ -132,7 +126,7 @@ input:focus {
     background-image: linear-gradient(to top, #683496 0%, #6f86d6 100%);
     text-transform: uppercase;
     text-decoration: none;
-    outline:none;
+    outline: none;
     color: white;
     padding: 1.2rem 2.2rem;
     border: none;
@@ -150,7 +144,7 @@ input:focus {
 }
 
 .result-table {
-    font-size: 1.6rem;
+    font-size: 1.35rem;
     border-collapse: collapse;
     border-spacing: 0;
     width: 100%;
@@ -225,10 +219,6 @@ input:focus {
     font-style: italic;
 }
 
-.on-mobile {
-    display: none;
-}
-
 .highlight-bold {
     font-weight: bold;
     color: #683496;
@@ -282,17 +272,5 @@ input:focus {
 @media only screen and (min-width: 1200px) {
     .container {
         width: 50rem;
-    }
-}
-
-@media only screen and (max-width: 768px) {
-    .hid-mobile {
-        display: none;
-    }
-}
-
-@media only screen and (max-width: 768px) {
-    .on-mobile {
-        display: inline;
     }
 }
