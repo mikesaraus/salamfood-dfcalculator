@@ -38,7 +38,7 @@ function initMap () {
         style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
         mapTypeControlOptions: {
             style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-            position: google.maps.ControlPosition.BOTTOM_LEFT
+            position: google.maps.ControlPosition.BOTTOM_CENTER
         }
     };
 
