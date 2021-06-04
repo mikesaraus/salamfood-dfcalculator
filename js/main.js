@@ -28,7 +28,7 @@ function initMap () {
         scaleControl: true,
         rotateControl: true,
         zoomControlStyle: google.maps.ZoomControlStyle.SMALL,
-        gestureHandling: (checkIsMobile()) ? "cooperative" : "greedy",
+        gestureHandling: "greedy", //cooperative
         style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
         streetViewControl: true,
         streetViewControlOptions: {
@@ -288,6 +288,20 @@ function getLocation () {
     } else {
         alert("Error: The Geolocation service failed.");
     }
+}
+
+var searchStatus = true;
+function toggleSearch () {
+    if (searchStatus) {
+        $("#direction-container").addClass("transparentStyle");
+        $("#direction-form").addClass("fadeOut");
+        $("#direction-title").addClass('fadeOut');
+    } else {
+        $("#direction-container").removeClass("transparentStyle");
+        $("#direction-title").removeClass('fadeOut');
+        $("#direction-form").removeClass("fadeOut");
+    }
+    searchStatus = !searchStatus;
 }
 
 $(document).keydown((event) => {

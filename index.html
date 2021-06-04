@@ -34,11 +34,14 @@
 </head>
 
 <body>
-    <div class="container">
-        <form>
-            <div class="in-title">
-                <h1><img src="./salamfood-2.png" width="150px"></h1>
-            </div>
+    <div class="container" id="direction-container">
+        <h1 class="hide-form">
+            <i class="fas fa-minus" style="position: absolute; top: 1rem; right: 1rem; font-size: 12px; cursor: pointer;" onclick="toggleSearch()"></i>
+        </h1>
+        <div id="direction-title" class="in-title">
+            <h1><img src="./salamfood-2.png" width="150px"></h1>
+        </div>
+        <form id="direction-form">
             <!-- Location 1 -->
             <div class="row input-area">
                 <div class="location-label">
@@ -67,7 +70,11 @@
     </div>
 
     <div class="container-map" id="google-map"></div>
-    <div id="route-panel"></div>
+    <div id="route-panel">
+        <p>
+            <i class="fas fa-external-link-alt" style="background-color: transparent;"></i>
+        </p>
+    </div>
 
     <!-- Footer with dynamic year change -->
     <div class="footer">

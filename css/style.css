@@ -47,7 +47,7 @@ i.fas {
     position: absolute;
     overflow: hidden;
     border-radius: 1rem;
-    background-color: hsla(0, 0%, 100%, 0.95);
+    background-color: #fffffff2;
     padding: 1.5rem;
     z-index: 1;
     margin: 1rem;
@@ -148,11 +148,6 @@ input:focus::placeholder {
     border-collapse: collapse;
     border-spacing: 0;
     width: 100%;
-
-    /* Animation */
-    animation-name: moveIn;
-    animation-duration: 1s;
-    animation-timing-function: ease-out;
 }
 
 #route-panel {
@@ -166,7 +161,7 @@ input:focus::placeholder {
     right: 0;
 }
 
-#route-panel > * {
+#route-panel > div {
     padding: 1rem;
     background-color: #fff;
 }
@@ -224,6 +219,9 @@ input:focus::placeholder {
     color: #683496;
 }
 
+.transparentStyle {
+    background-color: #ffffff55;
+}
 
 /* Animations */
 @keyframes moveIn {
@@ -236,6 +234,37 @@ input:focus::placeholder {
       opacity: 1;
       transform: translateY(0);
     }
+}
+
+@keyframes moveOut {
+    0% {
+      opacity: 1;
+      transform: translateY(-.5rem);
+    }
+    
+    100% {
+      opacity: 0;
+      transform: translateY(0);
+    }
+}
+
+/* Animate */
+.result-table,
+#route-panel,
+#direction-form,
+#direction-title {
+    /* Animation */
+    animation-name: moveIn;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+}
+
+.fadeOut {
+    /* Animation */
+    animation-name: moveOut;
+    animation-duration: 1s;
+    animation-timing-function: ease-in;
+    display: none;
 }
 
 /* Media */
@@ -258,6 +287,9 @@ input:focus::placeholder {
 @media only screen and (min-width: 768px) {
     .container {
         width: 50rem;
+    }
+    #route-panel {
+        display: none;
     }
 }
 
