@@ -135,6 +135,7 @@ function calcRoute () {
                 });
             } else {
                 google.maps.event.clearListeners(directionsDisplay, 'directions_changed');
+                window.alert("Make sure your search is spelled correctly. Try adding a street, city, state, or zip code.");
             }
             var from, to;
             if (result.routes.length > 0) {
@@ -305,11 +306,6 @@ function submitSearch (goinput = true) {
 function autoCompleteChanged (autocomplete, mode) {
     autocomplete.addListener("place_changed", () => {
         const place = autocomplete.getPlace();
-        if (!place.place_id) {
-            window.alert("Make sure your search is spelled correctly. Try adding a street, city, state, or zip code.");
-            return;
-        }
-
         if (mode === "ORIG") {
             this.autocomplete1 = place.place_id;
         } else {
