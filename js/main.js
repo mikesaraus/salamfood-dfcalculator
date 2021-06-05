@@ -29,25 +29,28 @@ function initMap () {
         rotateControl: true,
         zoomControlStyle: google.maps.ZoomControlStyle.SMALL,
         gestureHandling: "greedy", //cooperative
-        style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
         streetViewControl: true,
         streetViewControlOptions: {
             position: google.maps.ControlPosition.LEFT_CENTER
         },
-        fullscreenControl: true,
-        fullscreenControlOptions: {
-            position: google.maps.ControlPosition.BOTTOM_LEFT
-        },
         zoomControl: true,
         zoomControlOptions: {
             position: google.maps.ControlPosition.LEFT_CENTER
+        },
+        navigationControl: true,
+        navigationControlOptions: {
+            style: google.maps.NavigationControlStyle.SMALL
         },
         mapId: "288ebbf7e4c6cacd",
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         mapTypeControl: true,
         mapTypeControlOptions: {
             style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-            position: google.maps.ControlPosition.TOP_RIGHT
+            position: google.maps.ControlPosition.BOTTOM_CENTER
+        },
+        fullscreenControl: true,
+        fullscreenControlOptions: {
+            position: google.maps.ControlPosition.BOTTOM_LEFT
         }
     };
 
@@ -99,7 +102,6 @@ function initMap () {
 
 // Define calcRoute function
 function calcRoute () {
-    //create request
     // waypoints: [
     //     { location: "location3" },
     //     { location: "location4" },
@@ -294,14 +296,26 @@ var searchStatus = true;
 function toggleSearch () {
     if (searchStatus) {
         $("#direction-container").addClass("transparentStyle");
+        $("#iconToggleSearch").addClass("fa-plus");
         $("#direction-form").addClass("fadeOut");
         $("#direction-title").addClass('fadeOut');
     } else {
         $("#direction-container").removeClass("transparentStyle");
+        $("#iconToggleSearch").removeClass("fa-plus");
         $("#direction-title").removeClass('fadeOut');
         $("#direction-form").removeClass("fadeOut");
     }
     searchStatus = !searchStatus;
+}
+
+var routeStatus = false;
+function toggleRoute () {
+    if (!routeStatus) {
+        $("#route-panel").addClass("route-show");
+    } else {
+        $("#route-panel").removeClass("route-show");
+    }
+    routeStatus = !routeStatus;
 }
 
 $(document).keydown((event) => {

@@ -159,6 +159,15 @@ input:focus::placeholder {
     overflow-y: auto;
     top: 0;
     right: 0;
+    display: none;
+}
+
+.route-hidden {
+    display: none;
+}
+
+.route-show {
+    display: block;
 }
 
 #route-panel > div {
@@ -177,6 +186,44 @@ input:focus::placeholder {
 
 #route-panel i {
   font-size: 14px;
+}
+
+#toggleRoute {
+    position: fixed;
+    right: 0;
+    top: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: rgb(104 52 150 / 50%);
+}
+
+#toggleRoute:hover {
+    color: rgb(104 52 150 / 100%);
+}
+
+#iconToggleSearch {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    font-size: 12px;
+    cursor: pointer;
+    color: rgb(104 52 150 / 50%);
+}
+
+#iconToggleSearch:hover {
+    color: rgb(104 52 150 / 100%);
+}
+
+#iconToggleSearch.fa-plus {
+    padding: 2px;
+    color: gray;
+    background-color: #ffffff;
+}
+
+.transparentStyle {
+    background-color: transparent;
 }
 
 .container-map {
@@ -202,6 +249,7 @@ input:focus::placeholder {
 
 .footer p {
     color: hsla(0, 0%, 100%, 0.75);
+    padding-bottom: 50px;
 }
 
 .footer a {
@@ -219,8 +267,27 @@ input:focus::placeholder {
     color: #683496;
 }
 
-.transparentStyle {
-    background-color: #ffffff55;
+#direction-title {
+    cursor: pointer;
+}
+
+/* Animate */
+.result-table,
+#route-panel,
+#direction-form,
+#direction-title {
+    /* Animation */
+    animation-name: moveIn;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+}
+
+.fadeOut {
+    /* Animation */
+    animation-name: moveOut;
+    animation-duration: 1s;
+    animation-timing-function: ease-in;
+    display: none;
 }
 
 /* Animations */
@@ -248,25 +315,6 @@ input:focus::placeholder {
     }
 }
 
-/* Animate */
-.result-table,
-#route-panel,
-#direction-form,
-#direction-title {
-    /* Animation */
-    animation-name: moveIn;
-    animation-duration: 1s;
-    animation-timing-function: ease-out;
-}
-
-.fadeOut {
-    /* Animation */
-    animation-name: moveOut;
-    animation-duration: 1s;
-    animation-timing-function: ease-in;
-    display: none;
-}
-
 /* Media */
 
 /* Extra small devices (phones, 600px and down) */
@@ -279,7 +327,7 @@ input:focus::placeholder {
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
     .container {
-        width: 95%;
+        width: 50rem;
     }
 }
 
@@ -287,9 +335,6 @@ input:focus::placeholder {
 @media only screen and (min-width: 768px) {
     .container {
         width: 50rem;
-    }
-    #route-panel {
-        display: none;
     }
 }
 
