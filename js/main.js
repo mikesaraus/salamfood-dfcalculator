@@ -312,7 +312,9 @@ var routeStatus = false;
 function toggleRoute () {
     if (!routeStatus) {
         $("#route-panel").addClass("route-show");
+        $("#route-panel").removeClass("route-hidden");
     } else {
+        $("#route-panel").addClass("route-hidden");
         $("#route-panel").removeClass("route-show");
     }
     routeStatus = !routeStatus;
