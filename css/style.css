@@ -260,10 +260,6 @@ input:focus::placeholder {
     color: #683496;
 }
 
-#direction-title {
-    cursor: pointer;
-}
-
 /* Animate */
 .result-table,
 #route-panel,

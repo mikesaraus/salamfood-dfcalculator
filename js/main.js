@@ -1,6 +1,6 @@
-let map, directionsDisplay, directionsService;
-let murl = new URL(window.location.href);
+let map, directionsDisplay, directionsService, googleMap, marker, autocomplete1, autocomplete2;
 
+let murl = new URL(window.location.href);
 var lat = 7.0754028,
     lng = 125.581717,
     myLatLng = { lat: lat, lng: lng };
@@ -14,12 +14,12 @@ var csr_link = (checkIsMobile()) ? "https://m.me/salamfooddelivery.csr" : "https
 var messenger = "<a target='_blank' href='" + csr_link + "' style='text-decoration: none;'><i class='fab fa-facebook-messenger'></i>messenger</a>";
 initMap();
 
-function checkIsMobile() {
+function checkIsMobile () {
     if (typeof window.orientation !== 'undefined') return true;
     return false;
 }
 
-function initMap() {
+function initMap () {
     "use strict";
 
     var mapOptions = {
@@ -54,15 +54,21 @@ function initMap() {
         }
     };
 
+    googleMap = document.getElementById('google-map');
     output_df = document.getElementById("output");
     input1 = document.getElementById("location-1");
     input2 = document.getElementById("location-2");
+
+    marker = new google.maps.Marker({
+        map,
+        anchorPoint: new google.maps.Point(0, -29),
+    });
 
     // Hide result box
     output_df.style.display = "none";
 
     // Create/Init map
-    map = new google.maps.Map(document.getElementById('google-map'), mapOptions);
+    map = new google.maps.Map(googleMap, mapOptions);
 
     // Create a DirectionsService object to use the route method and get a result for our request
     directionsService = new google.maps.DirectionsService();
@@ -90,18 +96,20 @@ function initMap() {
     }
 
     // Create autocomplete objects for all inputs
-    var autocomplete1 = new google.maps.places.Autocomplete(input1, map_options);
+    autocomplete1 = new google.maps.places.Autocomplete(input1, map_options);
     autocomplete1.setBounds(map_circle.getBounds());
+    autoCompleteChanged(autocomplete1, "ORIG");
 
-    var autocomplete2 = new google.maps.places.Autocomplete(input2, map_options);
+    autocomplete2 = new google.maps.places.Autocomplete(input2, map_options);
     autocomplete2.setBounds(map_circle.getBounds());
+    autoCompleteChanged(autocomplete2, "DEST");
 
     // Preload URL Query
     cparseUrl(murl);
 }
 
 // Define calcRoute function
-function calcRoute() {
+function calcRoute () {
     // waypoints: [
     //     { location: "location3" },
     //     { location: "location4" },
@@ -127,7 +135,6 @@ function calcRoute() {
                 });
             } else {
                 google.maps.event.clearListeners(directionsDisplay, 'directions_changed');
-                alert("Make sure your search is spelled correctly. Try adding a street, city, state, or zip code.");
             }
             var from, to;
             if (result.routes.length > 0) {
@@ -143,7 +150,7 @@ function calcRoute() {
 
 }
 
-function computeTotalDistance(result) {
+function computeTotalDistance (result) {
     const myroute = result.routes[0];
     if (!myroute || myroute == null) return;
 
@@ -181,7 +188,7 @@ function computeTotalDistance(result) {
     murl = new URL(window.location.href);
 }
 
-function checkBlocklist(blocklist, text) {
+function checkBlocklist (blocklist, text) {
     var result = false;
     blocklist.forEach(word => {
         if (text.includes(word)) {
@@ -193,7 +200,7 @@ function checkBlocklist(blocklist, text) {
 
 
 // Clear results
-function clearRoute() {
+function clearRoute () {
     history.pushState({}, "Direction", "./");
     input1.value = "";
     input2.value = "";
@@ -203,14 +210,14 @@ function clearRoute() {
 }
 
 // Reset Map
-function resetRoute() {
+function resetRoute () {
     output_df.style.display = "none";
     directionsDisplay.setDirections({ routes: [] });
     map.setCenter(myLatLng);
 }
 
 // Check Delivery Fee
-function CALCULATEDF(km, type = "errands") {
+function CALCULATEDF (km, type = "errands") {
     type = type.toLocaleLowerCase();
     var fee = (km > 0) ? 50 : 0;
     km = Math.round(km);
@@ -251,7 +258,7 @@ function CALCULATEDF(km, type = "errands") {
     return fee;
 }
 
-function fetchAddress(p) {
+function fetchAddress (p) {
     var Position = new google.maps.LatLng(p.coords.latitude, p.coords.longitude),
         Locater = new google.maps.Geocoder();
 
@@ -263,15 +270,15 @@ function fetchAddress(p) {
     });
 }
 
-function cparseUrl() {
+function cparseUrl () {
     var from = murl.searchParams.get('from'),
         to = murl.searchParams.get('to');
     input1.value = from;
     input2.value = to;
-    submitSearch();
+    submitSearch((from || to) ? true : false);
 }
 
-function submitSearch() {
+function submitSearch (goinput = true) {
     var from = input1.value,
         to = input2.value;
     if (from.toLowerCase() == "my location") {
@@ -280,16 +287,39 @@ function submitSearch() {
     }
     if (from && to) {
         calcRoute();
-    } else if (!from && to) {
-        input1.focus()
-    } else if (from && !to) {
-        input2.focus();
+        googleMap.focus();
     } else {
-        input1.focus();
+        if (goinput) {
+            if (!from && to) {
+                input1.focus();
+            } else if (from && !to) {
+                input2.focus();
+            } else {
+                input1.focus();
+            }
+        }
     }
 }
 
-function getLocation() {
+
+function autoCompleteChanged (autocomplete, mode) {
+    autocomplete.addListener("place_changed", () => {
+        const place = autocomplete.getPlace();
+        if (!place.place_id) {
+            window.alert("Make sure your search is spelled correctly. Try adding a street, city, state, or zip code.");
+            return;
+        }
+
+        if (mode === "ORIG") {
+            this.autocomplete1 = place.place_id;
+        } else {
+            this.autocomplete2 = place.place_id;
+        }
+        submitSearch();
+    });
+}
+
+function getLocation () {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(fetchAddress);
         submitSearch();
@@ -299,7 +329,7 @@ function getLocation() {
 }
 
 var searchStatus = true;
-function toggleSearch() {
+function toggleSearch () {
     if (searchStatus) {
         $("#direction-container").addClass("transparentStyle");
         $("#iconToggleSearch").addClass("fa-plus");
@@ -315,7 +345,7 @@ function toggleSearch() {
 }
 
 var routeStatus = false;
-function toggleRoute() {
+function toggleRoute () {
     if (!routeStatus) {
         $("#route-panel").addClass("route-show");
         $("#route-panel").removeClass("route-hidden");
