@@ -244,12 +244,8 @@ input:focus::placeholder {
     left: 0;
     bottom: 0;
     width: 100%;
-    text-align: center; 
-}
-
-.footer p {
-    color: hsla(0, 0%, 100%, 0.75);
-    padding-bottom: 50px;
+    text-align: center;
+    margin-bottom: 50px;
 }
 
 .footer a {
