@@ -14,12 +14,12 @@ var csr_link = (checkIsMobile()) ? "https://m.me/salamfooddelivery.csr" : "https
 var messenger = "<a target='_blank' href='" + csr_link + "' style='text-decoration: none;'><i class='fab fa-facebook-messenger'></i>messenger</a>";
 initMap();
 
-function checkIsMobile () {
+function checkIsMobile() {
     if (typeof window.orientation !== 'undefined') return true;
     return false;
 }
 
-function initMap () {
+function initMap() {
     "use strict";
 
     var mapOptions = {
@@ -101,7 +101,7 @@ function initMap () {
 }
 
 // Define calcRoute function
-function calcRoute () {
+function calcRoute() {
     // waypoints: [
     //     { location: "location3" },
     //     { location: "location4" },
@@ -143,7 +143,7 @@ function calcRoute () {
 
 }
 
-function computeTotalDistance (result) {
+function computeTotalDistance(result) {
     const myroute = result.routes[0];
     if (!myroute || myroute == null) return;
 
@@ -181,7 +181,7 @@ function computeTotalDistance (result) {
     murl = new URL(window.location.href);
 }
 
-function checkBlocklist (blocklist, text) {
+function checkBlocklist(blocklist, text) {
     var result = false;
     blocklist.forEach(word => {
         if (text.includes(word)) {
@@ -193,7 +193,7 @@ function checkBlocklist (blocklist, text) {
 
 
 // Clear results
-function clearRoute () {
+function clearRoute() {
     history.pushState({}, "Direction", "./");
     input1.value = "";
     input2.value = "";
@@ -203,14 +203,14 @@ function clearRoute () {
 }
 
 // Reset Map
-function resetRoute () {
+function resetRoute() {
     output_df.style.display = "none";
     directionsDisplay.setDirections({ routes: [] });
     map.setCenter(myLatLng);
 }
 
 // Check Delivery Fee
-function CALCULATEDF (km, type = "errands") {
+function CALCULATEDF(km, type = "errands") {
     type = type.toLocaleLowerCase();
     var fee = (km > 0) ? 50 : 0;
     km = Math.round(km);
@@ -236,6 +236,12 @@ function CALCULATEDF (km, type = "errands") {
             fee = 85;
         } else if (km > 8.5 && km <= 9.5) {
             fee = 95;
+        } else if (km > 9.5 && km <= 14.5) {
+            fee = 125;
+        } else if (km > 14.5 && km <= 24.5) {
+            fee = 155;
+        } else if (km > 24.5 && km <= 29.5) {
+            fee = 225;
         } else {
             fee = 95;
         }
@@ -245,7 +251,7 @@ function CALCULATEDF (km, type = "errands") {
     return fee;
 }
 
-function fetchAddress (p) {
+function fetchAddress(p) {
     var Position = new google.maps.LatLng(p.coords.latitude, p.coords.longitude),
         Locater = new google.maps.Geocoder();
 
@@ -257,7 +263,7 @@ function fetchAddress (p) {
     });
 }
 
-function cparseUrl () {
+function cparseUrl() {
     var from = murl.searchParams.get('from'),
         to = murl.searchParams.get('to');
     input1.value = from;
@@ -265,7 +271,7 @@ function cparseUrl () {
     submitSearch();
 }
 
-function submitSearch () {
+function submitSearch() {
     var from = input1.value,
         to = input2.value;
     if (from.toLowerCase() == "my location") {
@@ -283,7 +289,7 @@ function submitSearch () {
     }
 }
 
-function getLocation () {
+function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(fetchAddress);
         submitSearch();
@@ -293,7 +299,7 @@ function getLocation () {
 }
 
 var searchStatus = true;
-function toggleSearch () {
+function toggleSearch() {
     if (searchStatus) {
         $("#direction-container").addClass("transparentStyle");
         $("#iconToggleSearch").addClass("fa-plus");
@@ -309,7 +315,7 @@ function toggleSearch () {
 }
 
 var routeStatus = false;
-function toggleRoute () {
+function toggleRoute() {
     if (!routeStatus) {
         $("#route-panel").addClass("route-show");
         $("#route-panel").removeClass("route-hidden");

@@ -69,15 +69,11 @@ i.fas {
 
 .location-input i {
   position: absolute;
-
-  /* These are set relative to the height of the input box to bound the box neatly inside. This is aesthetic to me but you may change the dimensions of course. */
   right: 0.3rem;
   top: 0.3rem;
   width: 2.6rem;
   height: 2.6rem;
   border-radius: 0.3rem;
-
-  /* content in the icon div is centered, without bootstrap or font-awesome you may wish to add your own text in the span */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -318,6 +314,11 @@ input:focus::placeholder {
     .container {
         width: 95%;
     }
+    #route,
+    #route-panel {
+        width: 100%;
+        z-index: 2;
+    }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -325,12 +326,22 @@ input:focus::placeholder {
     .container {
         width: 50rem;
     }
+    #route,
+    #route-panel {
+        width: 50%;
+        z-index: 2;
+    }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
     .container {
         width: 50rem;
+    }
+    #route,
+    #route-panel {
+        width: 50%;
+        z-index: 2;
     }
 }
 
