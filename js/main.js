@@ -5,9 +5,6 @@ var lat = 7.070975,
     lng = 125.6103582,
     myLatLng = { lat: lat, lng: lng };
 
-var city = "Davao",
-    black_list = ["Samal, Davao del Norte"];
-
 const citymap = {
     davao: {
         center: myLatLng,
@@ -15,13 +12,14 @@ const citymap = {
     }
 }
 
+var black_list = ["Samal, Davao del Norte"];
+
 var output_df, input1, input2;
 
 var csr_link = (checkIsMobile()) ? "https://m.me/salamfooddelivery.csr" : "https://facebook.com/messages/t/salamfooddelivery.csr";
 var messenger = "<a target='_blank' href='" + csr_link + "' style='text-decoration: none;'><i class='fab fa-facebook-messenger'></i>messenger</a>";
 
 initMap();
-toggleSearch();
 
 function checkIsMobile () {
     if (typeof window.orientation !== 'undefined') return true;
@@ -179,8 +177,8 @@ function calcRoute () {
                 from = result.routes[0].legs[0].start_address;
                 to = result.routes[0].legs[0].end_address;
             }
-            input1.style.color = (from == "" || from == null || from.length < 1) ? "red" : "#683496";
-            input2.style.color = (to == "" || to == null || to.length < 1) ? "red" : "#683496";;
+            input1.style.color = (from) ? "#683496" : "red";
+            input2.style.color = (to) ? "#683496" : "red";
         });
     } else {
         alert("Please enter address!");
@@ -206,8 +204,8 @@ function computeTotalDistance (result) {
 
     var html_result = "<div class='result-table' style='margin: 10px auto;'>";
     var contact_us = "<span class='info-small'>Please contact us on " + messenger + ".</span>";
-    if (!(from.includes(city) || to.includes(city)) || (checkBlocklist(black_list, from) || checkBlocklist(black_list, to))) {
-        html_result += "<span class='highlight-bold'>As of the moment we are only accepting deliveries at " + city + " City.</span><br />" + contact_us + "<br />";
+    if (!validCity(from, to) || (checkBlocklist(black_list, from) || checkBlocklist(black_list, to))) {
+        html_result += "<span class='highlight-bold'>As of the moment we are only accepting deliveries at " + Object.keys(citymap).join(", ").toUpperCase() + " City.</span><br />" + contact_us + "<br />";
     } else if (Math.round(d_km) > 60) {
         html_result += "<span class='highlight-bold'>Unfortunately we do not deliver to location greater than 50km.</span><br/>" + contact_us + "<br />";
     }
@@ -229,15 +227,29 @@ function computeTotalDistance (result) {
 
 function checkBlocklist (blocklist, text) {
     var result = false;
-    blocklist.forEach(word => {
-        if (text.includes(word)) {
+    text = text.toLowerCase();
+    blocklist.forEach((address) => {
+        if (text.includes(address.toLowerCase())) {
             result = true;
         }
     });
     return result;
 }
 
-
+function validCity (from, to) {
+    from = from.toLowerCase();
+    to = to.toLowerCase();
+    let ct = Object.keys(citymap);
+    var result = false;
+    ct.forEach((city) => {
+        if (from.includes(city.toLowerCase()) || to.includes(city.toLowerCase())) {
+            result = true;
+        }
+    })
+    console.log("RESULT: " + result);
+    console.log(ct);
+    return result;
+}
 // Clear results
 function clearRoute () {
     history.pushState({}, "Direction", "./");
