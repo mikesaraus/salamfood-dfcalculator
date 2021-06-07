@@ -354,8 +354,6 @@ function submitSearch (goinput = true) {
 function autoCompleteChanged (autocomplete, mode) {
     autocomplete.addListener("place_changed", () => {
         const place = autocomplete.getPlace();
-        if (!place.geometry || !place.geometry.location) return;
-
         if (mode === "ORIG") {
             this.autocomplete1 = place.place_id;
         } else {
@@ -403,9 +401,7 @@ function toggleRoute () {
 }
 
 $(document).keydown((event) => {
-    if (event.key === "Enter") {
-        submitSearch();
-    } else if (event.key === "Backspace") {
+    if (event.key === "Backspace") {
         var x = document.activeElement.tagName;
         if (x !== "INPUT") {
             clearRoute();
