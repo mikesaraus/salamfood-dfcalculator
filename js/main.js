@@ -146,7 +146,7 @@ function calcRoute() {
                 computeTotalDistance(result);
                 directionsDisplay.setDirections(result);
                 directionsDisplay.addListener("directions_changed", () => {
-                    computeTotalDistance(directionsDisplay.getDirections(), "DRAG");
+                    computeTotalDistance(directionsDisplay.getDirections(), "drag");
                 });
             } else {
                 google.maps.event.clearListeners(directionsDisplay, 'directions_changed');
@@ -200,7 +200,7 @@ function computeTotalDistance(result, ref = null) {
     $("#output").html(html_result);
     output_df.style.display = "block";
 
-    if (ref) {
+    if (ref.toLowerCase() == "drag") {
         input1.value = from;
         input2.value = to;
     }
