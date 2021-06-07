@@ -1,12 +1,19 @@
 let map, directionsDisplay, directionsService, googleMap, marker, autocomplete1, autocomplete2;
 
 let murl = new URL(window.location.href);
-var lat = 7.0754028,
-    lng = 125.581717,
+var lat = 7.070975,
+    lng = 125.6103582,
     myLatLng = { lat: lat, lng: lng };
 
 var city = "Davao",
     black_list = ["Samal, Davao del Norte"];
+
+const citymap = {
+    davao: {
+        center: myLatLng,
+        population: 1866401,
+    }
+}
 
 var output_df, input1, input2;
 
@@ -69,6 +76,19 @@ function initMap() {
 
     // Create/Init map
     map = new google.maps.Map(googleMap, mapOptions);
+    for (const city in citymap) {
+        // Add the circle for this city to the map.
+        const cityCircle = new google.maps.Circle({
+            strokeColor: "#683496",
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: "transparent",
+            fillOpacity: 0.35,
+            map,
+            center: citymap[city].center,
+            radius: Math.sqrt(citymap[city].population) * 100,
+        });
+    }
 
     // Create a DirectionsService object to use the route method and get a result for our request
     directionsService = new google.maps.DirectionsService();
@@ -163,7 +183,6 @@ function calcRoute() {
     } else {
         alert("Please enter address!");
     }
-
 }
 
 function computeTotalDistance(result, ref = "default") {
