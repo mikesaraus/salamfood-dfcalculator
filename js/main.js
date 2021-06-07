@@ -12,6 +12,9 @@ const citymap = {
     }
 }
 
+var searchStatus = true,
+    routeStatus = false;
+
 var black_list = ["Samal, Davao del Norte"];
 
 var output_df, input1, input2;
@@ -35,7 +38,7 @@ function initMap () {
         scaleControl: true,
         rotateControl: true,
         zoomControlStyle: google.maps.ZoomControlStyle.SMALL,
-        gestureHandling: "greedy", //cooperative
+        gestureHandling: "greedy",
         streetViewControl: true,
         streetViewControlOptions: {
             position: google.maps.ControlPosition.LEFT_CENTER
@@ -48,7 +51,6 @@ function initMap () {
         navigationControlOptions: {
             style: google.maps.NavigationControlStyle.SMALL
         },
-        // mapId: "288ebbf7e4c6cacd",
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         mapTypeControl: true,
         mapTypeControlOptions: {
@@ -70,14 +72,10 @@ function initMap () {
         map,
         anchorPoint: new google.maps.Point(0, -29),
     });
-
-    // Hide result box
     output_df.style.display = "none";
 
-    // Create/Init map
     map = new google.maps.Map(googleMap, mapOptions);
     for (const city in citymap) {
-        // Add the circle for this city to the map.
         const cityCircle = new google.maps.Circle({
             strokeColor: "#683496",
             strokeOpacity: 0.8,
@@ -90,10 +88,7 @@ function initMap () {
         });
     }
 
-    // Create a DirectionsService object to use the route method and get a result for our request
     directionsService = new google.maps.DirectionsService();
-
-    // Create a DirectionsRenderer object which we will use to display the route
     directionsDisplay = new google.maps.DirectionsRenderer({
         draggable: true,
         map,
@@ -119,7 +114,6 @@ function initMap () {
     autocomplete1 = new google.maps.places.Autocomplete(input1, map_options);
     autocomplete1.setBounds(map_circle.getBounds());
     autoCompleteChanged(autocomplete1, "ORIG");
-
     autocomplete2 = new google.maps.places.Autocomplete(input2, map_options);
     autocomplete2.setBounds(map_circle.getBounds());
     autoCompleteChanged(autocomplete2, "DEST");
@@ -131,10 +125,8 @@ function initMap () {
     // Add a style-selector control to the map.
     const styleControl = document.getElementById("style-selector-control");
     map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(styleControl);
-    // Set the map's style to the initial value of the selector.
     const styleSelector = document.getElementById("style-selector");
     map.setOptions({ styles: mapStyles[styleSelector.value] });
-    // Apply new JSON when the user selects a different style.
     styleSelector.addEventListener("change", () => {
         map.setOptions({ styles: mapStyles[styleSelector.value] });
     });
@@ -143,12 +135,7 @@ function initMap () {
     cparseUrl(murl);
 }
 
-// Define calcRoute function
 function calcRoute () {
-    // waypoints: [
-    //     { location: "location3" },
-    //     { location: "location4" },
-    // ]
     var request = {
         origin: input1.value,
         destination: input2.value,
@@ -160,7 +147,6 @@ function calcRoute () {
         avoidTolls: true
     }
     if (request.origin.length > 0 && request.destination.length > 0) {
-        // Routing
         directionsService.route(request, function (result, status) {
             if (status == google.maps.DirectionsStatus.OK) {
                 computeTotalDistance(result);
@@ -188,14 +174,11 @@ function calcRoute () {
 function computeTotalDistance (result) {
     const myroute = result.routes[0];
     if (!myroute || myroute == null) return;
-
     console.log(result);
 
-    // Detected Address
     var from = myroute.legs[0].start_address;
     var to = myroute.legs[0].end_address;
 
-    //Get distance, time and delivery fee
     var d_km = myroute.legs[0].distance.value / 1000;
     var delivery_fee = CALCULATEDF(d_km.toFixed(1)).toFixed(2);
 
@@ -248,7 +231,7 @@ function validCity (from, to) {
     })
     return result;
 }
-// Clear results
+
 function clearRoute () {
     history.pushState({}, "Direction", "./");
     input1.value = "";
@@ -258,14 +241,12 @@ function clearRoute () {
     resetRoute();
 }
 
-// Reset Map
 function resetRoute () {
     output_df.style.display = "none";
     directionsDisplay.setDirections({ routes: [] });
     map.setCenter(myLatLng);
 }
 
-// Check Delivery Fee
 function CALCULATEDF (km, type = "errands") {
     type = type.toLocaleLowerCase();
     var fee = (km > 0) ? 50 : 0;
@@ -321,9 +302,11 @@ function fetchAddress (p) {
 
 function cparseUrl () {
     var from = murl.searchParams.get('from'),
-        to = murl.searchParams.get('to');
+        to = murl.searchParams.get('to'),
+        search = murl.searchParams.get('search');
     input1.value = from;
     input2.value = to;
+    if (search == "false") toggleSearch();
     submitSearch((from || to) ? true : false);
 }
 
@@ -350,7 +333,6 @@ function submitSearch (goinput = true) {
     }
 }
 
-
 function autoCompleteChanged (autocomplete, mode) {
     autocomplete.addListener("place_changed", () => {
         const place = autocomplete.getPlace();
@@ -372,23 +354,21 @@ function getLocation () {
     }
 }
 
-var searchStatus = true;
 function toggleSearch () {
     if (searchStatus) {
         $("#direction-container").addClass("transparentStyle");
-        $("#iconToggleSearch").addClass("fa-plus");
+        $("#iconToggleSearch").addClass("fa-search");
         $("#direction-form").addClass("fadeOut");
         $("#direction-title").addClass('fadeOut');
     } else {
         $("#direction-container").removeClass("transparentStyle");
-        $("#iconToggleSearch").removeClass("fa-plus");
+        $("#iconToggleSearch").removeClass("fa-search");
         $("#direction-title").removeClass('fadeOut');
         $("#direction-form").removeClass("fadeOut");
     }
     searchStatus = !searchStatus;
 }
 
-var routeStatus = false;
 function toggleRoute () {
     if (!routeStatus) {
         $("#route-panel").addClass("route-show");
