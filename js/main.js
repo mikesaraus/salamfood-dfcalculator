@@ -189,7 +189,7 @@ function computeTotalDistance (result) {
     var contact_us = "<span class='info-small'>Please contact us on " + messenger + ".</span>";
     if (!validCity(from, to) || (checkBlocklist(black_list, from) || checkBlocklist(black_list, to))) {
         html_result += "<span class='highlight-bold'>As of the moment we are only accepting deliveries at " + Object.keys(citymap).join(", ").toUpperCase() + " City.</span><br />" + contact_us + "<br />";
-    } else if (Math.round(d_km) > 60) {
+    } else if (Math.round(d_km) > 50) {
         html_result += "<span class='highlight-bold'>Unfortunately we do not deliver to location greater than 50km.</span><br/>" + contact_us + "<br />";
     }
     else {
