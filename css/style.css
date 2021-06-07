@@ -140,10 +140,11 @@ input:focus::placeholder {
 }
 
 .result-table {
-    font-size: 1.35rem;
+    font-size: 1.3rem;
     border-collapse: collapse;
     border-spacing: 0;
     width: 100%;
+    line-height: 2rem;
 }
 
 #route-panel {
