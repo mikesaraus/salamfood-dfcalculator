@@ -168,7 +168,7 @@ function calcRoute () {
                 computeTotalDistance(result);
                 directionsDisplay.setDirections(result);
                 directionsDisplay.addListener("directions_changed", () => {
-                    computeTotalDistance(directionsDisplay.getDirections(), "drag");
+                    computeTotalDistance(directionsDisplay.getDirections());
                 });
             } else {
                 google.maps.event.clearListeners(directionsDisplay, 'directions_changed');
@@ -187,7 +187,7 @@ function calcRoute () {
     }
 }
 
-function computeTotalDistance (result, ref = "default") {
+function computeTotalDistance (result) {
     const myroute = result.routes[0];
     if (!myroute || myroute == null) return;
 
@@ -221,11 +221,8 @@ function computeTotalDistance (result, ref = "default") {
     $("#output").html(html_result);
     output_df.style.display = "block";
 
-    if (ref.toLowerCase() == "drag") {
-        input1.value = from;
-        input2.value = to;
-    }
-
+    input1.value = from;
+    input2.value = to;
     history.pushState({}, "Direction", ".?from=" + myroute.bounds.oc.g + "," + myroute.bounds.Eb.g + "&to=" + myroute.bounds.oc.i + "," + myroute.bounds.Eb.i);
     murl = new URL(window.location.href);
 }
