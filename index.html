@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <title>Salam Food Delivery</title>
 
@@ -22,7 +21,6 @@
     <link rel="stylesheet" href="./css/autocomplete.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120448615-2"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
@@ -32,9 +30,11 @@
     gtag('config', 'UA-120448615-2');
     </script>
 </head>
-
 <body>
     <div class="container" id="direction-container">
+        <div class="hide-form">
+            <i class="fas fa-minus" id="iconToggleSearch" onclick="toggleSearch()"></i>
+        </div>
         <div id="direction-title" class="in-title">
             <h1><img onclick="clearRoute()" src="./salamfood-flat.png" style="cursor: pointer;" width="150px"></h1>
         </div>
@@ -66,14 +66,6 @@
         </form>
     </div>
 
-    <div class="hide-form" id="routebtn">
-        <i class="fas fa-minus" id="iconToggleSearch" onclick="toggleSearch()"></i>
-    </div>
-    <div id="route">
-        <i id="toggleRoute" class="fas fa-external-link-alt" onclick="toggleRoute()"></i>
-        <div id="route-panel" class="route-hidden"></div>
-    </div>
-
     <div id="style-selector-control" class="map-control">
       <select id="style-selector" class="selector-control">
         <option value="default">Default</option>
@@ -87,7 +79,11 @@
 
     <div class="container-map" id="google-map"></div>
 
-    <!-- Footer with dynamic year change -->
+    <div id="route">
+        <i id="toggleRoute" class="fas fa-external-link-alt" onclick="toggleRoute()"></i>
+        <div id="route-panel" class="route-hidden"></div>
+    </div>
+    
     <div class="footer">
         <p>
             <a target="_blank" href="https://www.facebook.com/salamfoodservice">
@@ -103,12 +99,8 @@
     <script src="./js/map-style.js"></script>
     <script src="./js/main.js"></script>
 
-    <!-- Messenger Chat Plugin Code -->
     <div id="fb-root"></div>
-
-    <!-- Your Chat Plugin code -->
-    <div id="fb-customer-chat" class="fb-customerchat">
-    </div>
+    <div id="fb-customer-chat" class="fb-customerchat"></div>
 
     <script>
         var chatbox = document.getElementById('fb-customer-chat');
@@ -130,5 +122,4 @@
         }(document, 'script', 'facebook-jssdk'));
     </script>
 </body>
-
 </html>
