@@ -6,11 +6,12 @@ const mapStyles = {
             stylers: [{ visibility: "on" }],
         },
         {
+            featureType: "road.highway",
             elementType: "labels.text.fill",
             stylers: [{ color: "#683496" }],
         },
         {
-            featureType: "road.highway",
+            featureType: "administrative.land_parcel",
             elementType: "labels.text.fill",
             stylers: [{ color: "#683496" }],
         },
