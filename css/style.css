@@ -323,6 +323,10 @@ input:focus::placeholder {
         width: 100%;
         z-index: 2;
     }
+
+    #style-selector-control {
+        display: none;
+    }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
