@@ -69,7 +69,19 @@
         </form>
     </div>
 
+    <div id="style-selector-control" class="map-control">
+      <select id="style-selector" class="selector-control">
+        <option value="default">Default</option>
+        <option value="salam" selected>Salam Food</option>
+        <option value="silver">Silver</option>
+        <option value="night">Night mode</option>
+        <option value="retro">Retro</option>
+        <option value="hiding">Hide features</option>
+      </select>
+    </div>
+
     <div class="container-map" id="google-map"></div>
+
     <div id="route">
         <i id="toggleRoute" class="fas fa-external-link-alt" onclick="toggleRoute()"></i>
         <div id="route-panel" class="route-hidden"></div>
@@ -88,6 +100,7 @@
     <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1wSQGAKzfWD8L71juLGRaAZRg8U3QNBU&libraries=places"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="./js/map-style.js"></script>
     <script src="./js/main.js"></script>
 
     <!-- Messenger Chat Plugin Code -->

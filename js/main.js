@@ -41,7 +41,7 @@ function initMap () {
         navigationControlOptions: {
             style: google.maps.NavigationControlStyle.SMALL
         },
-        mapId: "288ebbf7e4c6cacd",
+        // mapId: "288ebbf7e4c6cacd",
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         mapTypeControl: true,
         mapTypeControlOptions: {
@@ -106,13 +106,13 @@ function initMap () {
 
     // Add a style-selector control to the map.
     const styleControl = document.getElementById("style-selector-control");
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(styleControl);
+    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(styleControl);
     // Set the map's style to the initial value of the selector.
     const styleSelector = document.getElementById("style-selector");
-    map.setOptions({ styles: styles[styleSelector.value] });
+    map.setOptions({ styles: mapStyles[styleSelector.value] });
     // Apply new JSON when the user selects a different style.
     styleSelector.addEventListener("change", () => {
-        map.setOptions({ styles: styles[styleSelector.value] });
+        map.setOptions({ styles: mapStyles[styleSelector.value] });
     });
 
     // Preload URL Query
