@@ -246,8 +246,6 @@ function validCity (from, to) {
             result = true;
         }
     })
-    console.log("RESULT: " + result);
-    console.log(ct);
     return result;
 }
 // Clear results
@@ -356,6 +354,8 @@ function submitSearch (goinput = true) {
 function autoCompleteChanged (autocomplete, mode) {
     autocomplete.addListener("place_changed", () => {
         const place = autocomplete.getPlace();
+        if (!place.geometry || !place.geometry.location) return;
+
         if (mode === "ORIG") {
             this.autocomplete1 = place.place_id;
         } else {
