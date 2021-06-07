@@ -166,7 +166,7 @@ function calcRoute() {
 
 }
 
-function computeTotalDistance(result, ref = null) {
+function computeTotalDistance(result, ref = "default") {
     const myroute = result.routes[0];
     if (!myroute || myroute == null) return;
 
@@ -204,6 +204,7 @@ function computeTotalDistance(result, ref = null) {
         input1.value = from;
         input2.value = to;
     }
+
     history.pushState({}, "Direction", ".?from=" + myroute.bounds.oc.g + "," + myroute.bounds.Eb.g + "&to=" + myroute.bounds.oc.i + "," + myroute.bounds.Eb.i);
     murl = new URL(window.location.href);
 }
