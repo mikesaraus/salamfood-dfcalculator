@@ -104,6 +104,18 @@ function initMap () {
     autocomplete2.setBounds(map_circle.getBounds());
     autoCompleteChanged(autocomplete2, "DEST");
 
+    // Add a search-form control to the map.
+    const searchForm = document.getElementById("direction-container");
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(searchForm);
+
+    // Add a routeButton control to the map.
+    const routeButton = document.getElementById("routebtn");
+    map.controls[google.maps.ControlPosition.TOP_RIGHT].push(routeButton);
+
+    // Add a routePanel control to the map.
+    const routePanel = document.getElementById("route");
+    map.controls[google.maps.ControlPosition.TOP_RIGHT].push(routePanel);
+
     // Add a style-selector control to the map.
     const styleControl = document.getElementById("style-selector-control");
     map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(styleControl);

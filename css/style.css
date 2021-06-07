@@ -190,10 +190,13 @@ input:focus::placeholder {
     right: 0;
     top: 0;
     margin: 0;
-    padding: 0;
+    padding: .5rem;
+    border: none;
+    border-radius: 2px;
     font-size: 1.5rem;
     cursor: pointer;
-    color: rgb(104 52 150 / 50%);
+    color: rgb(86, 86, 86);
+    background-color: rgb(255 255 255 / 100%);
 }
 
 #toggleRoute:hover {

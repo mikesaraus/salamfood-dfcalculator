@@ -35,9 +35,6 @@
 
 <body>
     <div class="container" id="direction-container">
-        <div class="hide-form">
-            <i class="fas fa-minus" id="iconToggleSearch" onclick="toggleSearch()"></i>
-        </div>
         <div id="direction-title" class="in-title">
             <h1><img onclick="clearRoute()" src="./salamfood-flat.png" style="cursor: pointer;" width="150px"></h1>
         </div>
@@ -69,6 +66,14 @@
         </form>
     </div>
 
+    <div class="hide-form" id="routebtn">
+        <i class="fas fa-minus" id="iconToggleSearch" onclick="toggleSearch()"></i>
+    </div>
+    <div id="route">
+        <i id="toggleRoute" class="fas fa-external-link-alt" onclick="toggleRoute()"></i>
+        <div id="route-panel" class="route-hidden"></div>
+    </div>
+
     <div id="style-selector-control" class="map-control">
       <select id="style-selector" class="selector-control">
         <option value="default">Default</option>
@@ -81,11 +86,6 @@
     </div>
 
     <div class="container-map" id="google-map"></div>
-
-    <div id="route">
-        <i id="toggleRoute" class="fas fa-external-link-alt" onclick="toggleRoute()"></i>
-        <div id="route-panel" class="route-hidden"></div>
-    </div>
 
     <!-- Footer with dynamic year change -->
     <div class="footer">
