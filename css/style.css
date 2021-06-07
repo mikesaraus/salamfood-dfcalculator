@@ -68,16 +68,16 @@ i.fas {
 }
 
 .location-input i {
-  position: absolute;
-  right: 0.3rem;
-  top: 0.3rem;
-  width: 2.6rem;
-  height: 2.6rem;
-  border-radius: 0.3rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
+    position: absolute;
+    right: 0.3rem;
+    top: 0.3rem;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 0.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
 }
 
 #getLocation {
@@ -173,15 +173,15 @@ input:focus::placeholder {
 
 #route-panel select,
 #route-panel input {
-  font-size: 16px;
+    font-size: 16px;
 }
 
 #route-panel select {
-  width: 100%;
+    width: 100%;
 }
 
 #route-panel i {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 #toggleRoute {
@@ -231,15 +231,18 @@ input:focus::placeholder {
 }
 
 .panel {
-  height: 100%;
-  overflow: auto;
+    height: 100%;
+    overflow: auto;
 }
 
 .selector-control {
-  font-size: 14px;
-  line-height: 30px;
-  padding-left: 5px;
-  padding-right: 5px;
+    font-size: 14px;
+    line-height: 30px;
+    border: 0;
+    border-radius: 2px;
+    padding: .5rem;
+    outline: none;
+    background-color: white;
 }
 
 .footer {
