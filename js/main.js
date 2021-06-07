@@ -104,6 +104,17 @@ function initMap () {
     autocomplete2.setBounds(map_circle.getBounds());
     autoCompleteChanged(autocomplete2, "DEST");
 
+    // Add a style-selector control to the map.
+    const styleControl = document.getElementById("style-selector-control");
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(styleControl);
+    // Set the map's style to the initial value of the selector.
+    const styleSelector = document.getElementById("style-selector");
+    map.setOptions({ styles: styles[styleSelector.value] });
+    // Apply new JSON when the user selects a different style.
+    styleSelector.addEventListener("change", () => {
+        map.setOptions({ styles: styles[styleSelector.value] });
+    });
+
     // Preload URL Query
     cparseUrl(murl);
 }
@@ -179,7 +190,7 @@ function computeTotalDistance (result) {
         html_result += "Distance Between: <span class='highlight-bold'>" + d_km.toFixed(1) + " kilometers</span><br />";
         html_result += "Estimated Duration: <span class='highlight-bold'>" + delivery_time + "-" + (delivery_time + 5) + " mins delivery</span><br />";
         html_result += "Delivery Fee: <span class='highlight-bold'>" + delivery_fee + " pesos only</span><br />";
-        html_result += "<span class='info-small'>Chat with our CSR on " + messenger + ".</span>";
+        html_result += "<span class='info-small'>Chat with us on " + messenger + ".</span>";
     }
     html_result += "</div>";
     $("#output").html(html_result);
