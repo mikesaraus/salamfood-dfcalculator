@@ -153,8 +153,6 @@ function calcRoute () {
                 directionsDisplay.setDirections(result);
                 directionsDisplay.addListener("directions_changed", () => {
                     computeTotalDistance(directionsDisplay.getDirections());
-                    input1.value = "";
-                    input2.value = "";
                 });
             } else {
                 google.maps.event.clearListeners(directionsDisplay, 'directions_changed');
