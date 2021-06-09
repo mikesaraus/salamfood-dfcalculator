@@ -153,6 +153,8 @@ function calcRoute () {
                 directionsDisplay.setDirections(result);
                 directionsDisplay.addListener("directions_changed", () => {
                     computeTotalDistance(directionsDisplay.getDirections());
+                    input1.value = "";
+                    input2.value = "";
                 });
             } else {
                 google.maps.event.clearListeners(directionsDisplay, 'directions_changed');
@@ -202,8 +204,8 @@ function computeTotalDistance (result) {
     $("#output").html(html_result);
     output_df.style.display = "block";
 
-    input1.value = from;
-    input2.value = to;
+    // input1.value = from;
+    // input2.value = to;
     history.pushState({}, "Direction", ".?from=" + myroute.bounds.oc.g + "," + myroute.bounds.Eb.g + "&to=" + myroute.bounds.oc.i + "," + myroute.bounds.Eb.i);
     murl = new URL(window.location.href);
 }
