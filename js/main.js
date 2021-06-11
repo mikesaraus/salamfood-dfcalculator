@@ -13,7 +13,7 @@ const citymap = {
 }
 
 var searchStatus = true,
-    routeStatus = true;
+    routeStatus = (checkIsMobile()) ? false : true;
 
 var black_list = ["Samal, Davao del Norte"];
 
@@ -132,6 +132,7 @@ function initMap() {
     });
 
     // Preload URL Query
+    toggleRoute();
     cparseUrl(murl);
 }
 
