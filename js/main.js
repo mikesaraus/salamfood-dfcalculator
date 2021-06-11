@@ -13,7 +13,7 @@ const citymap = {
 }
 
 var searchStatus = true,
-    routeStatus = (checkIsMobile()) ? false : true;
+    routeStatus = (checkIsMobile()) ? true : false;
 
 var black_list = ["Samal, Davao del Norte"];
 
