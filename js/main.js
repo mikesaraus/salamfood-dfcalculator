@@ -1,9 +1,15 @@
 let map, directionsDisplay, directionsService, googleMap, marker, autocomplete1, autocomplete2;
+let output_df, input1, input2;
 
 let murl = new URL(window.location.href);
 var lat = 7.070975,
     lng = 125.6103582,
     myLatLng = { lat: lat, lng: lng };
+
+var minimum_dfrate = 50,
+    maximum_distance = 50,
+    searchStatus = true,
+    routeStatus = (checkIsMobile()) ? true : false;
 
 const citymap = {
     davao: {
@@ -11,16 +17,7 @@ const citymap = {
         population: 1866401,
     }
 }
-
-var minimum_dfrate = 50,
-    maximum_distance = 50;
-
-var searchStatus = true,
-    routeStatus = (checkIsMobile()) ? true : false;
-
 var black_list = ["Samal, Davao del Norte"];
-
-var output_df, input1, input2;
 
 var csr_link = (checkIsMobile()) ? "https://m.me/salamfooddelivery.csr" : "https://facebook.com/messages/t/salamfooddelivery.csr";
 var messenger = "<a target='_blank' href='" + csr_link + "' style='text-decoration: none;'><i class='fab fa-facebook-messenger'></i>messenger</a>";
@@ -186,6 +183,7 @@ function computeTotalDistance (result) {
     var d_km = myroute.legs[0].distance.value / 1000;
     var delivery_fee = CALCULATEDF(d_km.toFixed(1)).toFixed(2);
     var delivery_fee_discounted = (delivery_fee - (delivery_fee * 0.1).toFixed(0)).toFixed(2);
+
     if (delivery_fee <= minimum_dfrate) {
         delivery_fee_discounted = delivery_fee;
         delivery_fee = (parseFloat(delivery_fee) + 5).toFixed(2);
