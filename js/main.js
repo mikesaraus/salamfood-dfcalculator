@@ -182,7 +182,7 @@ function computeTotalDistance (result) {
 
     var d_km = myroute.legs[0].distance.value / 1000;
     var delivery_fee = CALCULATEDF(d_km.toFixed(1)).toFixed(2);
-    var delivery_fee_discounted = delivery_fee * 0.1;
+    var delivery_fee_discounted = (delivery_fee - (delivery_fee * 0.1).toFixed(0)).toFixed(2);
 
     var d_min = 10; //Estimated additional delivery time in minutes
     var delivery_time = Math.round((myroute.legs[0].duration.value / 60).toFixed(1));
@@ -197,7 +197,7 @@ function computeTotalDistance (result) {
     else {
         html_result += "Distance Between: <span class='highlight-bold'>" + d_km.toFixed(1) + " kilometers</span><br />";
         html_result += "Estimated Duration: <span class='highlight-bold'>" + delivery_time + "-" + (delivery_time + 5) + " mins delivery</span><br />";
-        html_result += "Delivery Fee: <span class='highlight-bold'><del style='color: #f62440'>" + delivery_fee + "</del> " + delivery_fee_discounted + " 10% OFF</span><br />";
+        html_result += "Delivery Fee: <span class='highlight-bold'><del style='color: #f62440; font - size: 1.1rem;'>" + delivery_fee + "</del> " + delivery_fee_discounted + " pesos only</span><br />";
         html_result += "<span class='info-small'>Chat with us on " + messenger + ".</span>";
     }
     html_result += "</div>";
