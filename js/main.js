@@ -12,6 +12,9 @@ const citymap = {
     }
 }
 
+var minimum_dfrate = 50,
+    maximum_distance = 50;
+
 var searchStatus = true,
     routeStatus = (checkIsMobile()) ? true : false;
 
@@ -183,6 +186,10 @@ function computeTotalDistance (result) {
     var d_km = myroute.legs[0].distance.value / 1000;
     var delivery_fee = CALCULATEDF(d_km.toFixed(1)).toFixed(2);
     var delivery_fee_discounted = (delivery_fee - (delivery_fee * 0.1).toFixed(0)).toFixed(2);
+    if (delivery_fee <= minimum_dfrate) {
+        delivery_fee_discounted = delivery_fee;
+        delivery_fee = delivery_fee + 5;
+    }
 
     var d_min = 10; //Estimated additional delivery time in minutes
     var delivery_time = Math.round((myroute.legs[0].duration.value / 60).toFixed(1));
@@ -191,8 +198,8 @@ function computeTotalDistance (result) {
     var contact_us = "<span class='info-small'>Please contact us on " + messenger + ".</span>";
     if (!validCity(from, to) || (checkBlocklist(black_list, from) || checkBlocklist(black_list, to))) {
         html_result += "<span class='highlight-bold'>As of the moment we are only accepting deliveries at " + Object.keys(citymap).join(", ").toUpperCase() + " City.</span><br />" + contact_us + "<br />";
-    } else if (Math.round(d_km) > 50) {
-        html_result += "<span class='highlight-bold'>Unfortunately we do not deliver to location greater than 50km.</span><br/>" + contact_us + "<br />";
+    } else if (Math.round(d_km) > maximum_distance) {
+        html_result += "<span class='highlight-bold'>Unfortunately we do not deliver to location greater than " + maximum_distance + "km.</span><br/>" + contact_us + "<br />";
     }
     else {
         html_result += "Distance Between: <span class='highlight-bold'>" + d_km.toFixed(1) + " kilometers</span><br />";
@@ -251,7 +258,7 @@ function resetRoute () {
 
 function CALCULATEDF (km, type = "errands") {
     type = type.toLocaleLowerCase();
-    var fee = (km > 0) ? 50 : 0;
+    var fee = (km > 0) ? minimum_dfrate : 0;
     km = Math.round(km);
     if (type == "errands") {
         while (km > 15) {
