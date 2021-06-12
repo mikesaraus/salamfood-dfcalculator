@@ -188,7 +188,7 @@ function computeTotalDistance (result) {
     var delivery_fee_discounted = (delivery_fee - (delivery_fee * 0.1).toFixed(0)).toFixed(2);
     if (delivery_fee <= minimum_dfrate) {
         delivery_fee_discounted = delivery_fee;
-        delivery_fee = delivery_fee + 5;
+        delivery_fee = (parseFloat(delivery_fee) + 5).toFixed(2);
     }
 
     var d_min = 10; //Estimated additional delivery time in minutes
