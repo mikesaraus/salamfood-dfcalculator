@@ -24,12 +24,12 @@ var messenger = "<a target='_blank' href='" + csr_link + "' style='text-decorati
 
 initMap();
 
-function checkIsMobile () {
+function checkIsMobile() {
     if (typeof window.orientation !== 'undefined') return true;
     return false;
 }
 
-function initMap () {
+function initMap() {
     "use strict";
 
     var mapOptions = {
@@ -136,7 +136,7 @@ function initMap () {
     cparseUrl(murl);
 }
 
-function calcRoute () {
+function calcRoute() {
     var request = {
         origin: input1.value,
         destination: input2.value,
@@ -172,7 +172,7 @@ function calcRoute () {
     }
 }
 
-function computeTotalDistance (result) {
+function computeTotalDistance(result) {
     const myroute = result.routes[0];
     if (!myroute || myroute == null) return;
     console.log(result);
@@ -215,7 +215,7 @@ function computeTotalDistance (result) {
     murl = new URL(window.location.href);
 }
 
-function checkBlocklist (blocklist, text) {
+function checkBlocklist(blocklist, text) {
     var result = false;
     text = text.toLowerCase();
     blocklist.forEach((address) => {
@@ -226,7 +226,7 @@ function checkBlocklist (blocklist, text) {
     return result;
 }
 
-function validCity (from, to) {
+function validCity(from, to) {
     from = from.toLowerCase();
     to = to.toLowerCase();
     let ct = Object.keys(citymap);
@@ -239,7 +239,7 @@ function validCity (from, to) {
     return result;
 }
 
-function clearRoute () {
+function clearRoute() {
     history.pushState({}, "Direction", "./");
     input1.value = "";
     input2.value = "";
@@ -248,13 +248,13 @@ function clearRoute () {
     resetRoute();
 }
 
-function resetRoute () {
+function resetRoute() {
     output_df.style.display = "none";
     directionsDisplay.setDirections({ routes: [] });
     map.setCenter(myLatLng);
 }
 
-function CALCULATEDF (km, type = "errands") {
+function CALCULATEDF(km, type = "errands") {
     type = type.toLocaleLowerCase();
     var fee = (km > 0) ? minimum_dfrate : 0;
     km = Math.round(km);
@@ -268,26 +268,16 @@ function CALCULATEDF (km, type = "errands") {
             km--;
         }
     } else if (type == "system") {
-        if (km > 0 && km <= 1.5) {
-            fee = 35;
-        } else if (km > 1.5 && km <= 3.5) {
-            fee = 45;
-        } else if (km > 3.5 && km <= 5.5) {
-            fee = 65;
-        } else if (km > 5.5 && km <= 7.5) {
-            fee = 75;
-        } else if (km > 7.5 && km <= 8.5) {
-            fee = 85;
-        } else if (km > 8.5 && km <= 9.5) {
-            fee = 95;
-        } else if (km > 9.5 && km <= 14.5) {
-            fee = 125;
-        } else if (km > 14.5 && km <= 24.5) {
-            fee = 155;
-        } else if (km > 24.5 && km <= 29.5) {
-            fee = 225;
+        if (km > 0 && km <= 5) {
+            fee = 49;
+        } else if (km > 5 && km <= 10) {
+            fee = 79;
+        } else if (km > 10 && km <= 15) {
+            fee = 119;
+        } else if (km > 15 && km <= 20) {
+            fee = 179;
         } else {
-            fee = 95;
+            fee = 179;
         }
     } else {
         fee = 0;
@@ -295,7 +285,7 @@ function CALCULATEDF (km, type = "errands") {
     return fee;
 }
 
-function fetchAddress (p) {
+function fetchAddress(p) {
     var Position = new google.maps.LatLng(p.coords.latitude, p.coords.longitude),
         Locater = new google.maps.Geocoder();
 
@@ -307,7 +297,7 @@ function fetchAddress (p) {
     });
 }
 
-function cparseUrl () {
+function cparseUrl() {
     var from = murl.searchParams.get('from'),
         to = murl.searchParams.get('to'),
         search = murl.searchParams.get('search');
@@ -317,7 +307,7 @@ function cparseUrl () {
     submitSearch((from || to) ? true : false);
 }
 
-function submitSearch (goinput = true) {
+function submitSearch(goinput = true) {
     var from = input1.value,
         to = input2.value;
     if (from.toLowerCase() == "my location") {
@@ -340,7 +330,7 @@ function submitSearch (goinput = true) {
     }
 }
 
-function autoCompleteChanged (autocomplete, mode) {
+function autoCompleteChanged(autocomplete, mode) {
     autocomplete.addListener("place_changed", () => {
         const place = autocomplete.getPlace();
         if (mode === "ORIG") {
@@ -352,7 +342,7 @@ function autoCompleteChanged (autocomplete, mode) {
     });
 }
 
-function getLocation () {
+function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(fetchAddress);
         submitSearch();
@@ -361,7 +351,7 @@ function getLocation () {
     }
 }
 
-function toggleSearch () {
+function toggleSearch() {
     if (searchStatus) {
         $("#direction-container").addClass("transparentStyle");
         $("#iconToggleSearch").addClass("fa-search");
@@ -376,7 +366,7 @@ function toggleSearch () {
     searchStatus = !searchStatus;
 }
 
-function toggleRoute () {
+function toggleRoute() {
     if (!routeStatus) {
         $("#route-panel").addClass("route-show");
         $("#route-panel").removeClass("route-hidden");
